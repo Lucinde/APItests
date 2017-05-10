@@ -15,6 +15,11 @@ function loadData() {
 
     // YOUR CODE GOES HERE!
 
+    // fetch street and city values and append an image link to the body
+    var street = $('#street').val();
+    var city = $('#city').val();
+    $body.append('<img class="bgimg" src="http://maps.googleapis.com/maps/api/streetview?size=600x600&location=' + street + ',' + city + '">');
+
     return false;
 };
 
