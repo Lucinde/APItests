@@ -33,8 +33,9 @@ function loadData() {
         var intro = doc.snippet;
         $nytElem.append('<li><a href="' + url + '"> <h3>' + headline + '</h3></a><p>' + intro + '</p></li>' );
       }
+    }).error(function(){$nytElem.text('Articles could not be loaded')});
 
-    })
+
 
     return false;
 };
