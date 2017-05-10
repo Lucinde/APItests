@@ -35,7 +35,22 @@ function loadData() {
       }
     }).error(function(){$nytElem.text('Articles could not be loaded')});
 
-
+    // wikipedia timeout error handling
+    var wikiRequestTimeout = setTimeout(function(){$wikiElem.text("failed to get wikipedia resources");}, 8000);
+    // calling Wikipedia articles
+    $.ajax({
+      url: 'https://en.wikipedia.org/w/api.php?format=json&action=opensearch&search=' + city,
+      dataType: "jsonp",
+      success: function(search){
+          for ( i = 0; i < search[1].length; i++ ){
+            var title = search[1][i];
+            var intro = search[2][i];
+            var link = search[3][i];
+            $wikiElem.append('<li><a href="' + link + '"><h3>' + title + '</h3></a><p>' + intro + '</p></li>');
+          };
+          clearTimeout(wikiRequestTimeout);
+      }
+    })
 
     return false;
 };
